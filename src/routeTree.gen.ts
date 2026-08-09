@@ -11,7 +11,10 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BrandRouteImport } from './routes/brand'
+import { Route as CalendarRouteImport } from './routes/calendar'
 import { Route as CampaignsRouteImport } from './routes/campaigns'
+import { Route as ReputationRouteImport } from './routes/reputation'
+import { Route as StudioRouteImport } from './routes/studio'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -23,40 +26,75 @@ const BrandRoute = BrandRouteImport.update({
   path: '/brand',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CalendarRoute = CalendarRouteImport.update({
+  id: '/calendar',
+  path: '/calendar',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CampaignsRoute = CampaignsRouteImport.update({
   id: '/campaigns',
   path: '/campaigns',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReputationRoute = ReputationRouteImport.update({
+  id: '/reputation',
+  path: '/reputation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudioRoute = StudioRouteImport.update({
+  id: '/studio',
+  path: '/studio',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/brand': typeof BrandRoute
+  '/calendar': typeof CalendarRoute
   '/campaigns': typeof CampaignsRoute
+  '/reputation': typeof ReputationRoute
+  '/studio': typeof StudioRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/brand': typeof BrandRoute
+  '/calendar': typeof CalendarRoute
   '/campaigns': typeof CampaignsRoute
+  '/reputation': typeof ReputationRoute
+  '/studio': typeof StudioRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/brand': typeof BrandRoute
+  '/calendar': typeof CalendarRoute
   '/campaigns': typeof CampaignsRoute
+  '/reputation': typeof ReputationRoute
+  '/studio': typeof StudioRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/brand' | '/campaigns'
+  fullPaths:
+    '/' | '/brand' | '/calendar' | '/campaigns' | '/reputation' | '/studio'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/brand' | '/campaigns'
-  id: '__root__' | '/' | '/brand' | '/campaigns'
+  to: '/' | '/brand' | '/calendar' | '/campaigns' | '/reputation' | '/studio'
+  id:
+    | '__root__'
+    | '/'
+    | '/brand'
+    | '/calendar'
+    | '/campaigns'
+    | '/reputation'
+    | '/studio'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BrandRoute: typeof BrandRoute
+  CalendarRoute: typeof CalendarRoute
   CampaignsRoute: typeof CampaignsRoute
+  ReputationRoute: typeof ReputationRoute
+  StudioRoute: typeof StudioRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -75,11 +113,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BrandRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/calendar': {
+      id: '/calendar'
+      path: '/calendar'
+      fullPath: '/calendar'
+      preLoaderRoute: typeof CalendarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/campaigns': {
       id: '/campaigns'
       path: '/campaigns'
       fullPath: '/campaigns'
       preLoaderRoute: typeof CampaignsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reputation': {
+      id: '/reputation'
+      path: '/reputation'
+      fullPath: '/reputation'
+      preLoaderRoute: typeof ReputationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/studio': {
+      id: '/studio'
+      path: '/studio'
+      fullPath: '/studio'
+      preLoaderRoute: typeof StudioRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -88,7 +147,10 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BrandRoute: BrandRoute,
+  CalendarRoute: CalendarRoute,
   CampaignsRoute: CampaignsRoute,
+  ReputationRoute: ReputationRoute,
+  StudioRoute: StudioRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
