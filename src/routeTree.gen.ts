@@ -13,12 +13,12 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AnalyticsRouteImport } from './routes/analytics'
 import { Route as BrandRouteImport } from './routes/brand'
 import { Route as CalendarRouteImport } from './routes/calendar'
-import { Route as CampaignsRouteImport } from './routes/campaigns'
 import { Route as ConnectionsRouteImport } from './routes/connections'
 import { Route as EditorRouteImport } from './routes/editor'
 import { Route as PublishingRouteImport } from './routes/publishing'
 import { Route as ReputationRouteImport } from './routes/reputation'
 import { Route as StudioRouteImport } from './routes/studio'
+import { Route as CampaignsIndexRouteImport } from './routes/campaigns.index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -38,11 +38,6 @@ const BrandRoute = BrandRouteImport.update({
 const CalendarRoute = CalendarRouteImport.update({
   id: '/calendar',
   path: '/calendar',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CampaignsRoute = CampaignsRouteImport.update({
-  id: '/campaigns',
-  path: '/campaigns',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ConnectionsRoute = ConnectionsRouteImport.update({
@@ -70,30 +65,35 @@ const StudioRoute = StudioRouteImport.update({
   path: '/studio',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CampaignsIndexRoute = CampaignsIndexRouteImport.update({
+  id: '/campaigns/',
+  path: '/campaigns/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/analytics': typeof AnalyticsRoute
   '/brand': typeof BrandRoute
   '/calendar': typeof CalendarRoute
-  '/campaigns': typeof CampaignsRoute
   '/connections': typeof ConnectionsRoute
   '/editor': typeof EditorRoute
   '/publishing': typeof PublishingRoute
   '/reputation': typeof ReputationRoute
   '/studio': typeof StudioRoute
+  '/campaigns/': typeof CampaignsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/analytics': typeof AnalyticsRoute
   '/brand': typeof BrandRoute
   '/calendar': typeof CalendarRoute
-  '/campaigns': typeof CampaignsRoute
   '/connections': typeof ConnectionsRoute
   '/editor': typeof EditorRoute
   '/publishing': typeof PublishingRoute
   '/reputation': typeof ReputationRoute
   '/studio': typeof StudioRoute
+  '/campaigns': typeof CampaignsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -101,12 +101,12 @@ export interface FileRoutesById {
   '/analytics': typeof AnalyticsRoute
   '/brand': typeof BrandRoute
   '/calendar': typeof CalendarRoute
-  '/campaigns': typeof CampaignsRoute
   '/connections': typeof ConnectionsRoute
   '/editor': typeof EditorRoute
   '/publishing': typeof PublishingRoute
   '/reputation': typeof ReputationRoute
   '/studio': typeof StudioRoute
+  '/campaigns/': typeof CampaignsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -115,36 +115,36 @@ export interface FileRouteTypes {
     | '/analytics'
     | '/brand'
     | '/calendar'
-    | '/campaigns'
     | '/connections'
     | '/editor'
     | '/publishing'
     | '/reputation'
     | '/studio'
+    | '/campaigns/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/analytics'
     | '/brand'
     | '/calendar'
-    | '/campaigns'
     | '/connections'
     | '/editor'
     | '/publishing'
     | '/reputation'
     | '/studio'
+    | '/campaigns'
   id:
     | '__root__'
     | '/'
     | '/analytics'
     | '/brand'
     | '/calendar'
-    | '/campaigns'
     | '/connections'
     | '/editor'
     | '/publishing'
     | '/reputation'
     | '/studio'
+    | '/campaigns/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -152,12 +152,12 @@ export interface RootRouteChildren {
   AnalyticsRoute: typeof AnalyticsRoute
   BrandRoute: typeof BrandRoute
   CalendarRoute: typeof CalendarRoute
-  CampaignsRoute: typeof CampaignsRoute
   ConnectionsRoute: typeof ConnectionsRoute
   EditorRoute: typeof EditorRoute
   PublishingRoute: typeof PublishingRoute
   ReputationRoute: typeof ReputationRoute
   StudioRoute: typeof StudioRoute
+  CampaignsIndexRoute: typeof CampaignsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -188,13 +188,6 @@ declare module '@tanstack/react-router' {
       path: '/calendar'
       fullPath: '/calendar'
       preLoaderRoute: typeof CalendarRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/campaigns': {
-      id: '/campaigns'
-      path: '/campaigns'
-      fullPath: '/campaigns'
-      preLoaderRoute: typeof CampaignsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/connections': {
@@ -232,6 +225,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudioRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/campaigns/': {
+      id: '/campaigns/'
+      path: '/campaigns'
+      fullPath: '/campaigns/'
+      preLoaderRoute: typeof CampaignsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -240,12 +240,12 @@ const rootRouteChildren: RootRouteChildren = {
   AnalyticsRoute: AnalyticsRoute,
   BrandRoute: BrandRoute,
   CalendarRoute: CalendarRoute,
-  CampaignsRoute: CampaignsRoute,
   ConnectionsRoute: ConnectionsRoute,
   EditorRoute: EditorRoute,
   PublishingRoute: PublishingRoute,
   ReputationRoute: ReputationRoute,
   StudioRoute: StudioRoute,
+  CampaignsIndexRoute: CampaignsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
