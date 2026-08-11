@@ -15,6 +15,7 @@ import { Route as BrandRouteImport } from './routes/brand'
 import { Route as CalendarRouteImport } from './routes/calendar'
 import { Route as CampaignsRouteImport } from './routes/campaigns'
 import { Route as ConnectionsRouteImport } from './routes/connections'
+import { Route as EditorRouteImport } from './routes/editor'
 import { Route as PublishingRouteImport } from './routes/publishing'
 import { Route as ReputationRouteImport } from './routes/reputation'
 import { Route as StudioRouteImport } from './routes/studio'
@@ -49,6 +50,11 @@ const ConnectionsRoute = ConnectionsRouteImport.update({
   path: '/connections',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EditorRoute = EditorRouteImport.update({
+  id: '/editor',
+  path: '/editor',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PublishingRoute = PublishingRouteImport.update({
   id: '/publishing',
   path: '/publishing',
@@ -72,6 +78,7 @@ export interface FileRoutesByFullPath {
   '/calendar': typeof CalendarRoute
   '/campaigns': typeof CampaignsRoute
   '/connections': typeof ConnectionsRoute
+  '/editor': typeof EditorRoute
   '/publishing': typeof PublishingRoute
   '/reputation': typeof ReputationRoute
   '/studio': typeof StudioRoute
@@ -83,6 +90,7 @@ export interface FileRoutesByTo {
   '/calendar': typeof CalendarRoute
   '/campaigns': typeof CampaignsRoute
   '/connections': typeof ConnectionsRoute
+  '/editor': typeof EditorRoute
   '/publishing': typeof PublishingRoute
   '/reputation': typeof ReputationRoute
   '/studio': typeof StudioRoute
@@ -95,6 +103,7 @@ export interface FileRoutesById {
   '/calendar': typeof CalendarRoute
   '/campaigns': typeof CampaignsRoute
   '/connections': typeof ConnectionsRoute
+  '/editor': typeof EditorRoute
   '/publishing': typeof PublishingRoute
   '/reputation': typeof ReputationRoute
   '/studio': typeof StudioRoute
@@ -108,6 +117,7 @@ export interface FileRouteTypes {
     | '/calendar'
     | '/campaigns'
     | '/connections'
+    | '/editor'
     | '/publishing'
     | '/reputation'
     | '/studio'
@@ -119,6 +129,7 @@ export interface FileRouteTypes {
     | '/calendar'
     | '/campaigns'
     | '/connections'
+    | '/editor'
     | '/publishing'
     | '/reputation'
     | '/studio'
@@ -130,6 +141,7 @@ export interface FileRouteTypes {
     | '/calendar'
     | '/campaigns'
     | '/connections'
+    | '/editor'
     | '/publishing'
     | '/reputation'
     | '/studio'
@@ -142,6 +154,7 @@ export interface RootRouteChildren {
   CalendarRoute: typeof CalendarRoute
   CampaignsRoute: typeof CampaignsRoute
   ConnectionsRoute: typeof ConnectionsRoute
+  EditorRoute: typeof EditorRoute
   PublishingRoute: typeof PublishingRoute
   ReputationRoute: typeof ReputationRoute
   StudioRoute: typeof StudioRoute
@@ -191,6 +204,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ConnectionsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/editor': {
+      id: '/editor'
+      path: '/editor'
+      fullPath: '/editor'
+      preLoaderRoute: typeof EditorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/publishing': {
       id: '/publishing'
       path: '/publishing'
@@ -222,6 +242,7 @@ const rootRouteChildren: RootRouteChildren = {
   CalendarRoute: CalendarRoute,
   CampaignsRoute: CampaignsRoute,
   ConnectionsRoute: ConnectionsRoute,
+  EditorRoute: EditorRoute,
   PublishingRoute: PublishingRoute,
   ReputationRoute: ReputationRoute,
   StudioRoute: StudioRoute,
@@ -229,13 +250,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

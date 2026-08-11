@@ -19,7 +19,7 @@ import {
 import { toast } from "sonner";
 import { campaigns } from "@/lib/brandos-data";
 
-export const Route = createFileRoute("/campaigns")({
+export const Route = createFileRoute("/campaigns/")({
   head: () => ({
     meta: [
       { title: "Campaigns — BRANDOS" },
