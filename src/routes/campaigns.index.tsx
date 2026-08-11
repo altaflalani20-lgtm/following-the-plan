@@ -152,8 +152,12 @@ function CampaignsPage() {
             </div>
 
             <div className="mt-6 flex gap-2">
-              <Button size="sm" variant="outline" onClick={() => toast(`Opening ${c.name}`)}>
-                Open
+              <Button asChild size="sm" variant="outline">
+                <Link to="/campaigns/$campaignId" params={{ campaignId: c.id }}>
+                  Open
+                </Link>
+              </Button>
+
               </Button>
               <Button size="sm" variant="ghost" onClick={() => toast("Regenerating campaign assets…")}>
                 Regenerate assets
