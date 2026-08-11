@@ -157,8 +157,6 @@ function CampaignsPage() {
                   Open
                 </Link>
               </Button>
-
-              </Button>
               <Button size="sm" variant="ghost" onClick={() => toast("Regenerating campaign assets…")}>
                 Regenerate assets
               </Button>
