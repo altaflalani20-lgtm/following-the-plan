@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { AppShell } from "@/components/app-shell";
 import { Button } from "@/components/ui/button";
@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import { creativeFormats, creativeQueue, reelSteps } from "@/lib/brandos-data";
+import { creativeTypes } from "@/lib/brandos-v2-data";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/studio")({
@@ -33,6 +34,23 @@ function StudioPage() {
       title="Brief it once. Get it in every format."
       description="Creatives inherit your colours, type, logo rules and tone of voice. Every generation is versioned with its prompt and model."
     >
+      <section className="mb-10">
+        <h2 className="text-2xl">What are you creating?</h2>
+        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {creativeTypes.map((t) => (
+            <Link
+              key={t.id}
+              to="/editor"
+              className="panel p-5 transition-all hover:-translate-y-0.5 hover:border-ring hover:shadow-sm"
+            >
+              <p className="font-display text-xl leading-snug">{t.label}</p>
+              <p className="mt-1 text-xs text-muted-foreground">{t.blurb}</p>
+              <p className="mt-3 font-mono text-[11px] text-muted-foreground">{t.px}</p>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       <Tabs defaultValue="poster">
         <TabsList>
           <TabsTrigger value="poster">Poster</TabsTrigger>
