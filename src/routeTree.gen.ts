@@ -18,6 +18,7 @@ import { Route as ConnectionsRouteImport } from './routes/connections'
 import { Route as PublishingRouteImport } from './routes/publishing'
 import { Route as ReputationRouteImport } from './routes/reputation'
 import { Route as StudioRouteImport } from './routes/studio'
+import { Route as StudioIndexRouteImport } from './routes/studio.index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -64,6 +65,11 @@ const StudioRoute = StudioRouteImport.update({
   path: '/studio',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StudioIndexRoute = StudioIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => StudioRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -74,7 +80,8 @@ export interface FileRoutesByFullPath {
   '/connections': typeof ConnectionsRoute
   '/publishing': typeof PublishingRoute
   '/reputation': typeof ReputationRoute
-  '/studio': typeof StudioRoute
+  '/studio': typeof StudioRouteWithChildren
+  '/studio/': typeof StudioIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -85,7 +92,7 @@ export interface FileRoutesByTo {
   '/connections': typeof ConnectionsRoute
   '/publishing': typeof PublishingRoute
   '/reputation': typeof ReputationRoute
-  '/studio': typeof StudioRoute
+  '/studio': typeof StudioIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -97,7 +104,8 @@ export interface FileRoutesById {
   '/connections': typeof ConnectionsRoute
   '/publishing': typeof PublishingRoute
   '/reputation': typeof ReputationRoute
-  '/studio': typeof StudioRoute
+  '/studio': typeof StudioRouteWithChildren
+  '/studio/': typeof StudioIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -111,6 +119,7 @@ export interface FileRouteTypes {
     | '/publishing'
     | '/reputation'
     | '/studio'
+    | '/studio/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -133,6 +142,7 @@ export interface FileRouteTypes {
     | '/publishing'
     | '/reputation'
     | '/studio'
+    | '/studio/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -144,7 +154,7 @@ export interface RootRouteChildren {
   ConnectionsRoute: typeof ConnectionsRoute
   PublishingRoute: typeof PublishingRoute
   ReputationRoute: typeof ReputationRoute
-  StudioRoute: typeof StudioRoute
+  StudioRoute: typeof StudioRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -212,8 +222,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudioRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/studio/': {
+      id: '/studio/'
+      path: '/'
+      fullPath: '/studio/'
+      preLoaderRoute: typeof StudioIndexRouteImport
+      parentRoute: typeof StudioRoute
+    }
   }
 }
+
+interface StudioRouteChildren {
+  StudioIndexRoute: typeof StudioIndexRoute
+}
+
+const StudioRouteChildren: StudioRouteChildren = {
+  StudioIndexRoute: StudioIndexRoute,
+}
+
+const StudioRouteWithChildren =
+  StudioRoute._addFileChildren(StudioRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -224,7 +252,7 @@ const rootRouteChildren: RootRouteChildren = {
   ConnectionsRoute: ConnectionsRoute,
   PublishingRoute: PublishingRoute,
   ReputationRoute: ReputationRoute,
-  StudioRoute: StudioRoute,
+  StudioRoute: StudioRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
