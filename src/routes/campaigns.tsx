@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { AppShell } from "@/components/app-shell";
 import { Button } from "@/components/ui/button";
@@ -19,7 +19,7 @@ import {
 import { toast } from "sonner";
 import { campaigns } from "@/lib/brandos-data";
 
-export const Route = createFileRoute("/campaigns/")({
+export const Route = createFileRoute("/campaigns")({
   head: () => ({
     meta: [
       { title: "Campaigns — BRANDOS" },
@@ -152,10 +152,8 @@ function CampaignsPage() {
             </div>
 
             <div className="mt-6 flex gap-2">
-              <Button asChild size="sm" variant="outline">
-                <Link to="/campaigns/$campaignId" params={{ campaignId: c.id }}>
-                  Open
-                </Link>
+              <Button size="sm" variant="outline" onClick={() => toast(`Opening ${c.name}`)}>
+                Open
               </Button>
               <Button size="sm" variant="ghost" onClick={() => toast("Regenerating campaign assets…")}>
                 Regenerate assets

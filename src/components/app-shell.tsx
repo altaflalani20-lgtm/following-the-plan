@@ -19,7 +19,6 @@ import { type ReactNode, useEffect, useState } from "react";
 import { business } from "@/lib/brandos-data";
 import { Button } from "@/components/ui/button";
 import { CommandPalette } from "@/components/command-palette";
-import { GoalCreateDialog } from "@/components/goal-create-dialog";
 import { cn } from "@/lib/utils";
 
 const nav = [
@@ -35,7 +34,6 @@ const nav = [
     items: [
       { to: "/brand", label: "Brand Workspace", icon: Compass },
       { to: "/studio", label: "Creative Studio", icon: Palette },
-      { to: "/editor", label: "Creative Editor", icon: Wand2 },
     ],
   },
   {
@@ -70,7 +68,6 @@ export function AppShell({
 }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const [paletteOpen, setPaletteOpen] = useState(false);
-  const [createOpen, setCreateOpen] = useState(false);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -86,7 +83,6 @@ export function AppShell({
   return (
     <div className="min-h-screen bg-background">
       <CommandPalette open={paletteOpen} onOpenChange={setPaletteOpen} />
-      <GoalCreateDialog open={createOpen} onOpenChange={setCreateOpen} />
 
       <aside className="fixed inset-y-0 left-0 hidden w-64 flex-col border-r border-sidebar-border bg-sidebar lg:flex">
         <div className="flex h-16 items-center gap-2 border-b border-sidebar-border px-6">
@@ -159,7 +155,7 @@ export function AppShell({
             <Button variant="ghost" size="icon" aria-label="Notifications">
               <Bell className="size-4" />
             </Button>
-            <Button onClick={() => setCreateOpen(true)} className="gap-1.5">
+            <Button onClick={() => setPaletteOpen(true)} className="gap-1.5">
               <Plus className="size-4" /> Create
             </Button>
           </div>
