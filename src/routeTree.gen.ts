@@ -18,6 +18,7 @@ import { Route as ConnectionsRouteImport } from './routes/connections'
 import { Route as PublishingRouteImport } from './routes/publishing'
 import { Route as ReputationRouteImport } from './routes/reputation'
 import { Route as StudioRouteImport } from './routes/studio'
+import { Route as CampaignCampaignIdRouteImport } from './routes/campaign.$campaignId'
 import { Route as StudioIndexRouteImport } from './routes/studio.index'
 import { Route as StudioEditorRouteImport } from './routes/studio.editor'
 
@@ -66,6 +67,11 @@ const StudioRoute = StudioRouteImport.update({
   path: '/studio',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CampaignCampaignIdRoute = CampaignCampaignIdRouteImport.update({
+  id: '/campaign/$campaignId',
+  path: '/campaign/$campaignId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const StudioIndexRoute = StudioIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -87,6 +93,7 @@ export interface FileRoutesByFullPath {
   '/publishing': typeof PublishingRoute
   '/reputation': typeof ReputationRoute
   '/studio': typeof StudioRouteWithChildren
+  '/campaign/$campaignId': typeof CampaignCampaignIdRoute
   '/studio/editor': typeof StudioEditorRoute
   '/studio/': typeof StudioIndexRoute
 }
@@ -99,6 +106,7 @@ export interface FileRoutesByTo {
   '/connections': typeof ConnectionsRoute
   '/publishing': typeof PublishingRoute
   '/reputation': typeof ReputationRoute
+  '/campaign/$campaignId': typeof CampaignCampaignIdRoute
   '/studio/editor': typeof StudioEditorRoute
   '/studio': typeof StudioIndexRoute
 }
@@ -113,6 +121,7 @@ export interface FileRoutesById {
   '/publishing': typeof PublishingRoute
   '/reputation': typeof ReputationRoute
   '/studio': typeof StudioRouteWithChildren
+  '/campaign/$campaignId': typeof CampaignCampaignIdRoute
   '/studio/editor': typeof StudioEditorRoute
   '/studio/': typeof StudioIndexRoute
 }
@@ -128,6 +137,7 @@ export interface FileRouteTypes {
     | '/publishing'
     | '/reputation'
     | '/studio'
+    | '/campaign/$campaignId'
     | '/studio/editor'
     | '/studio/'
   fileRoutesByTo: FileRoutesByTo
@@ -140,6 +150,7 @@ export interface FileRouteTypes {
     | '/connections'
     | '/publishing'
     | '/reputation'
+    | '/campaign/$campaignId'
     | '/studio/editor'
     | '/studio'
   id:
@@ -153,6 +164,7 @@ export interface FileRouteTypes {
     | '/publishing'
     | '/reputation'
     | '/studio'
+    | '/campaign/$campaignId'
     | '/studio/editor'
     | '/studio/'
   fileRoutesById: FileRoutesById
@@ -167,6 +179,7 @@ export interface RootRouteChildren {
   PublishingRoute: typeof PublishingRoute
   ReputationRoute: typeof ReputationRoute
   StudioRoute: typeof StudioRouteWithChildren
+  CampaignCampaignIdRoute: typeof CampaignCampaignIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -234,6 +247,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudioRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/campaign/$campaignId': {
+      id: '/campaign/$campaignId'
+      path: '/campaign/$campaignId'
+      fullPath: '/campaign/$campaignId'
+      preLoaderRoute: typeof CampaignCampaignIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/studio/': {
       id: '/studio/'
       path: '/'
@@ -274,6 +294,7 @@ const rootRouteChildren: RootRouteChildren = {
   PublishingRoute: PublishingRoute,
   ReputationRoute: ReputationRoute,
   StudioRoute: StudioRouteWithChildren,
+  CampaignCampaignIdRoute: CampaignCampaignIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
