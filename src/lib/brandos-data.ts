@@ -271,3 +271,226 @@ export const publishingQueue = [
   { id: "q2", title: "Marina now open", platform: "Google", when: "Tomorrow 10:00", state: "Queued" },
   { id: "q3", title: "August menu letter", platform: "Email", when: "Yesterday 13:00", state: "Failed", error: "Sender domain not verified" },
 ];
+
+/* ---------------------------------------------------------------
+ * V2 — Pass 1 additions (demo data, nothing is published anywhere)
+ * ------------------------------------------------------------- */
+
+export type BusinessGoal = {
+  id: string;
+  label: string;
+  blurb: string;
+  aiPlan: string;
+  deliverables: { label: string; count: number }[];
+};
+
+export const businessGoals: BusinessGoal[] = [
+  {
+    id: "sales",
+    label: "Increase sales",
+    blurb: "Drive more orders in a defined window",
+    aiPlan: "A 14-day weekend growth campaign built around the family bundle.",
+    deliverables: [
+      { label: "Campaign strategy", count: 1 },
+      { label: "Reels", count: 4 },
+      { label: "Posters", count: 6 },
+      { label: "Stories", count: 8 },
+      { label: "Google Business posts", count: 3 },
+      { label: "WhatsApp campaigns", count: 2 },
+      { label: "Ad creatives", count: 2 },
+    ],
+  },
+  {
+    id: "leads",
+    label: "Generate leads",
+    blurb: "Capture catering and bulk-order enquiries",
+    aiPlan: "A catering lead-gen sprint with a form-first offer and follow-up flow.",
+    deliverables: [
+      { label: "Campaign strategy", count: 1 },
+      { label: "Lead ad creatives", count: 3 },
+      { label: "Carousels", count: 2 },
+      { label: "WhatsApp follow-ups", count: 3 },
+      { label: "Email sequence", count: 1 },
+    ],
+  },
+  {
+    id: "customers",
+    label: "Get more customers",
+    blurb: "Reach new people near each location",
+    aiPlan: "A first-visit offer targeted to a 3km radius around each location.",
+    deliverables: [
+      { label: "Campaign strategy", count: 1 },
+      { label: "Reels", count: 3 },
+      { label: "Posters", count: 4 },
+      { label: "Google Business posts", count: 3 },
+    ],
+  },
+  {
+    id: "reviews",
+    label: "Get more reviews",
+    blurb: "Lift rating and review volume",
+    aiPlan: "A post-purchase feedback loop that routes happy customers to Google.",
+    deliverables: [
+      { label: "Automation", count: 1 },
+      { label: "WhatsApp messages", count: 2 },
+      { label: "Stories", count: 3 },
+      { label: "Review reply policy", count: 1 },
+    ],
+  },
+  {
+    id: "launch",
+    label: "Launch a product",
+    blurb: "Introduce a new item or menu",
+    aiPlan: "A three-act launch: tease, reveal, proof.",
+    deliverables: [
+      { label: "Campaign strategy", count: 1 },
+      { label: "Reels", count: 3 },
+      { label: "Carousels", count: 2 },
+      { label: "Posters", count: 4 },
+      { label: "Email", count: 1 },
+    ],
+  },
+  {
+    id: "offer",
+    label: "Promote an offer",
+    blurb: "Push a time-boxed deal",
+    aiPlan: "A 7-day offer burst with daily reminders and a closing-hours push.",
+    deliverables: [
+      { label: "Posters", count: 5 },
+      { label: "Stories", count: 6 },
+      { label: "WhatsApp campaigns", count: 2 },
+      { label: "Ad creatives", count: 2 },
+    ],
+  },
+  {
+    id: "location",
+    label: "Grow a location",
+    blurb: "Fix an underperforming branch",
+    aiPlan: "A location-specific plan combining ops fixes with local reach.",
+    deliverables: [
+      { label: "Diagnosis brief", count: 1 },
+      { label: "Local posters", count: 3 },
+      { label: "Google Business posts", count: 4 },
+      { label: "Review recovery flow", count: 1 },
+    ],
+  },
+  {
+    id: "winback",
+    label: "Win back customers",
+    blurb: "Re-activate lapsed buyers",
+    aiPlan: "A two-touch win-back for 412 customers inactive 45+ days.",
+    deliverables: [
+      { label: "Automation", count: 1 },
+      { label: "WhatsApp messages", count: 2 },
+      { label: "Email", count: 1 },
+      { label: "Offer poster", count: 1 },
+    ],
+  },
+  {
+    id: "awareness",
+    label: "Build brand awareness",
+    blurb: "Be known before being needed",
+    aiPlan: "A story-led pillar plan: craft, people, neighbourhood.",
+    deliverables: [
+      { label: "Content pillars", count: 3 },
+      { label: "Reels", count: 6 },
+      { label: "Carousels", count: 3 },
+    ],
+  },
+  {
+    id: "retention",
+    label: "Improve retention",
+    blurb: "Make second orders happen faster",
+    aiPlan: "A 30-day second-order nudge with a low-cost incentive.",
+    deliverables: [
+      { label: "Automation", count: 1 },
+      { label: "WhatsApp messages", count: 3 },
+      { label: "Stories", count: 3 },
+    ],
+  },
+];
+
+export const creativeTypes = [
+  { id: "poster", label: "Poster", blurb: "Single-frame offer or announcement", ratio: "4:5" },
+  { id: "social", label: "Social post", blurb: "Feed post with caption", ratio: "1:1" },
+  { id: "carousel", label: "Carousel", blurb: "Multi-slide explainer", ratio: "4:5" },
+  { id: "story", label: "Story", blurb: "Full-screen vertical", ratio: "9:16" },
+  { id: "reel", label: "Reel", blurb: "Short vertical video", ratio: "9:16" },
+  { id: "video", label: "Video", blurb: "Longer edit with voiceover", ratio: "16:9" },
+  { id: "ad", label: "Ad creative", blurb: "Paid placement with strong CTA", ratio: "1:1" },
+  { id: "banner", label: "Banner", blurb: "Website or in-store banner", ratio: "1.91:1" },
+  { id: "flyer", label: "Flyer", blurb: "Print handout", ratio: "1:1.41" },
+  { id: "email", label: "Email", blurb: "Newsletter or campaign mail", ratio: "—" },
+  { id: "whatsapp", label: "WhatsApp creative", blurb: "Broadcast image + message", ratio: "1:1" },
+  { id: "gbp", label: "Google Business post", blurb: "Local update or offer", ratio: "4:3" },
+];
+
+export type BrandScore = {
+  total: number;
+  breakdown: { label: string; score: number }[];
+  issues: { severity: "warning" | "info"; message: string }[];
+};
+
+export const sampleBrandScore: BrandScore = {
+  total: 92,
+  breakdown: [
+    { label: "Visual identity", score: 94 },
+    { label: "Brand voice", score: 96 },
+    { label: "Messaging", score: 89 },
+    { label: "CTA", score: 91 },
+    { label: "Typography", score: 95 },
+  ],
+  issues: [
+    { severity: "warning", message: "This headline uses language outside your approved brand vocabulary (“cheapest”)." },
+    { severity: "info", message: "CTA is shorter than your usual style. Consider “Order before 8pm”." },
+  ],
+};
+
+export const campaignDetail = {
+  overview: {
+    audience: "Families within 4km of each location, 30–48",
+    offer: "Family bundle — save 25% Fri–Sun",
+    kpis: ["Orders", "Reach", "Cost per order", "Repeat rate"],
+  },
+  strategy: {
+    bigIdea: "Friday night is the neighbourhood ritual.",
+    positioning: "Not a discount — a reason to gather.",
+    message: "Grilled to order, on the table in 25 minutes.",
+    cta: "Order before 8pm",
+    insight: "Families order early on Friday and abandon when wait times are unclear.",
+  },
+  creative: [
+    { type: "Reels", done: 4, total: 6 },
+    { type: "Posters", done: 8, total: 10 },
+    { type: "Stories", done: 5, total: 5 },
+    { type: "Carousels", done: 1, total: 3 },
+    { type: "Ads", done: 2, total: 2 },
+  ],
+  distribution: [
+    { channel: "Instagram", state: "Connected", posts: 12 },
+    { channel: "Facebook", state: "Connected", posts: 9 },
+    { channel: "Google Business", state: "Connected", posts: 4 },
+    { channel: "WhatsApp", state: "Connected", posts: 2 },
+    { channel: "Email", state: "Not connected", posts: 0 },
+    { channel: "Ads", state: "Not connected", posts: 0 },
+  ],
+  performance: [
+    { label: "Reach", value: "72.4K", source: "Meta Insights · campaign to date" },
+    { label: "Leads", value: "128", source: "BRANDOS CRM · campaign to date" },
+    { label: "Customers", value: "86", source: "BRANDOS CRM · attributed" },
+    { label: "Revenue", value: "$14,320", source: "Estimated · partial attribution" },
+    { label: "CAC", value: "$9.30", source: "Estimated" },
+    { label: "ROAS", value: "3.1x", source: "Estimated" },
+  ],
+};
+
+export const contentPillars = [
+  { pillar: "Educational", share: 15 },
+  { pillar: "Promotional", share: 20 },
+  { pillar: "Engagement", share: 12 },
+  { pillar: "Social proof", share: 13 },
+  { pillar: "Behind the scenes", share: 12 },
+  { pillar: "Founder", share: 8 },
+  { pillar: "Product", share: 10 },
+  { pillar: "Community", share: 10 },
+];
