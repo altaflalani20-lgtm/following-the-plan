@@ -19,6 +19,7 @@ import { Route as PublishingRouteImport } from './routes/publishing'
 import { Route as ReputationRouteImport } from './routes/reputation'
 import { Route as StudioRouteImport } from './routes/studio'
 import { Route as StudioIndexRouteImport } from './routes/studio.index'
+import { Route as StudioEditorRouteImport } from './routes/studio.editor'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -70,6 +71,11 @@ const StudioIndexRoute = StudioIndexRouteImport.update({
   path: '/',
   getParentRoute: () => StudioRoute,
 } as any)
+const StudioEditorRoute = StudioEditorRouteImport.update({
+  id: '/editor',
+  path: '/editor',
+  getParentRoute: () => StudioRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -81,6 +87,7 @@ export interface FileRoutesByFullPath {
   '/publishing': typeof PublishingRoute
   '/reputation': typeof ReputationRoute
   '/studio': typeof StudioRouteWithChildren
+  '/studio/editor': typeof StudioEditorRoute
   '/studio/': typeof StudioIndexRoute
 }
 export interface FileRoutesByTo {
@@ -92,6 +99,7 @@ export interface FileRoutesByTo {
   '/connections': typeof ConnectionsRoute
   '/publishing': typeof PublishingRoute
   '/reputation': typeof ReputationRoute
+  '/studio/editor': typeof StudioEditorRoute
   '/studio': typeof StudioIndexRoute
 }
 export interface FileRoutesById {
@@ -105,6 +113,7 @@ export interface FileRoutesById {
   '/publishing': typeof PublishingRoute
   '/reputation': typeof ReputationRoute
   '/studio': typeof StudioRouteWithChildren
+  '/studio/editor': typeof StudioEditorRoute
   '/studio/': typeof StudioIndexRoute
 }
 export interface FileRouteTypes {
@@ -119,6 +128,7 @@ export interface FileRouteTypes {
     | '/publishing'
     | '/reputation'
     | '/studio'
+    | '/studio/editor'
     | '/studio/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -130,6 +140,7 @@ export interface FileRouteTypes {
     | '/connections'
     | '/publishing'
     | '/reputation'
+    | '/studio/editor'
     | '/studio'
   id:
     | '__root__'
@@ -142,6 +153,7 @@ export interface FileRouteTypes {
     | '/publishing'
     | '/reputation'
     | '/studio'
+    | '/studio/editor'
     | '/studio/'
   fileRoutesById: FileRoutesById
 }
@@ -229,14 +241,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudioIndexRouteImport
       parentRoute: typeof StudioRoute
     }
+    '/studio/editor': {
+      id: '/studio/editor'
+      path: '/editor'
+      fullPath: '/studio/editor'
+      preLoaderRoute: typeof StudioEditorRouteImport
+      parentRoute: typeof StudioRoute
+    }
   }
 }
 
 interface StudioRouteChildren {
+  StudioEditorRoute: typeof StudioEditorRoute
   StudioIndexRoute: typeof StudioIndexRoute
 }
 
 const StudioRouteChildren: StudioRouteChildren = {
+  StudioEditorRoute: StudioEditorRoute,
   StudioIndexRoute: StudioIndexRoute,
 }
 
