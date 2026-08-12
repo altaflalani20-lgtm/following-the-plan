@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { AppShell } from "@/components/app-shell";
 import { Button } from "@/components/ui/button";
@@ -152,9 +152,11 @@ function CampaignsPage() {
             </div>
 
             <div className="mt-6 flex gap-2">
-              <Button size="sm" variant="outline" onClick={() => toast(`Opening ${c.name}`)}>
-                Open
-              </Button>
+              <Link to="/campaign/$campaignId" params={{ campaignId: c.id }}>
+                <Button size="sm" variant="outline">
+                  Open
+                </Button>
+              </Link>
               <Button size="sm" variant="ghost" onClick={() => toast("Regenerating campaign assets…")}>
                 Regenerate assets
               </Button>
